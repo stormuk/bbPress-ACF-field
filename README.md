@@ -12,7 +12,7 @@ Compatibility
 This add-on will work with:
 
 * version 4 and up
-* version 3 and bellow
+* version 3 and below
 
 Installation
 ============
@@ -25,7 +25,7 @@ This add-on can be treated as both a WP plugin and a theme include.
 
 *Include*
 1.  Copy the 'bbPress-ACF-field' folder into your theme folder (can use sub folders). You can place the folder anywhere inside the 'wp-content' directory
-2.  Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-bbpress_forums_field.php file)
+2.  Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-bbpress_forums.php file)
 
 ```
 add_action('acf/register_fields', 'my_register_fields');
