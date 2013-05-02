@@ -22,20 +22,14 @@ class acf_field_bbpress_forums_field extends acf_field
 		$this->name = 'bbpress_forums_field';
 		$this->label = __('bbPress Forums');
 		$this->category = __("Basic",'acf'); // Basic, Content, Choice, etc
-		$this->defaults = array();
+		$this->defaults = array(
+      'multiple' => 0,
+      'allow_null' => 0
+    );
 
 
 		// do not delete!
     parent::__construct();
-
-    die("construct bbpress v4");
-
-    	// settings
-		$this->settings = array(
-			'path' => apply_filters('acf/helpers/get_path', __FILE__),
-			'dir' => apply_filters('acf/helpers/get_dir', __FILE__),
-			'version' => '1.0.0'
-		);
 
 	}
 
@@ -56,9 +50,8 @@ class acf_field_bbpress_forums_field extends acf_field
 	function create_options( $field )
 	{
 		// defaults?
-		$field['multiple'] = isset($field['multiple']) ? $field['multiple'] : '0';
-    $field['allow_null'] = isset($field['allow_null']) ? $field['allow_null'] : '0';
-
+    $field = array_merge($this->defaults, $field);
+    
 
 		// key is needed in the field names to correctly save the data
 		$key = $field['name'];
