@@ -29,7 +29,7 @@ class acf_field_bbpress_forums_plugin
 
 
 		// version 3-
-		add_action( 'init', array( $this, 'init' ));
+		add_action( 'init', array( $this, 'init' ), 5);
 	}
 
 

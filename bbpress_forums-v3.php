@@ -23,8 +23,6 @@ class acf_field_bbpress_forums extends acf_Field
 
   function __construct($parent)
   {
-    echo "CONSTRUCT FIELD";
-
     // do not delete!
     parent::__construct($parent);
 
