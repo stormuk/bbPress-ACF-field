@@ -19,7 +19,7 @@ class acf_field_bbpress_forums_field extends acf_field
 	function __construct()
 	{
 		// vars
-		$this->name = 'bbpress_forums';
+		$this->name = 'bbpress_forums_field';
 		$this->label = __('bbPress Forums');
 		$this->category = __("Basic",'acf'); // Basic, Content, Choice, etc
 		$this->defaults = array();

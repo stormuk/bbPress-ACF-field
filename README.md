@@ -24,7 +24,7 @@ This add-on can be treated as both a WP plugin and a theme include.
 2. Activate the plugin via the Plugins admin page
 
 *Include*
-1.  Copy the 'acf-bbpress_forums_field' folder into your theme folder (can use sub folders). You can place the folder anywhere inside the 'wp-content' directory
+1.  Copy the 'bbPress-ACF-field' folder into your theme folder (can use sub folders). You can place the folder anywhere inside the 'wp-content' directory
 2.  Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-bbpress_forums_field.php file)
 
 ```
@@ -32,7 +32,7 @@ add_action('acf/register_fields', 'my_register_fields');
 
 function my_register_fields()
 {
-  include_once('acf-bbpress_forums_field.php');
+  include_once('acf-bbpress_forums.php');
 }
 ```
 

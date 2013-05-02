@@ -29,7 +29,7 @@ class acf_field_bbpress_forums extends acf_Field
     parent::__construct($parent);
 
     // set name / title
-    $this->name = 'bbpress_forums';
+    $this->name = 'bbpress_forums_field';
     $this->title = __('bbPress Forums');
     $this->defaults = array();
 
