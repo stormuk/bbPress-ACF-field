@@ -6,16 +6,33 @@ This is an Advanced Custom Field (ACF) custom field to select one or many [bbPre
 This provides a field that lets you select from a list of bbPress Forums.
 
 
+Compatibility
+============
+
+This add-on will work with:
+
+* version 4 and up
+* version 3 and bellow
+
 Installation
 ============
 
-Download or clone the repository for bbPress-ACF-Field and put the bbpress_forums.php in your theme somewhere.  We like to create a Custom-Fields sub-directory to keep things tidy.
+This add-on can be treated as both a WP plugin and a theme include.
 
-Register the field in your functions.php file
+*Plugin*
+1. Copy the 'bbPress-ACF-field' folder into your plugins folder
+2. Activate the plugin via the Plugins admin page
+
+*Include*
+1.  Copy the 'acf-bbpress_forums_field' folder into your theme folder (can use sub folders). You can place the folder anywhere inside the 'wp-content' directory
+2.  Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-bbpress_forums_field.php file)
 
 ```
-if(function_exists('register_field')) {  
-  register_field(‘bbPress_forums_field', dirname(__File__) . '/Custom-Fields/bbpress_forums.php');
+add_action('acf/register_fields', 'my_register_fields');
+
+function my_register_fields()
+{
+  include_once('acf-bbpress_forums_field.php');
 }
 ```
 
@@ -52,6 +69,49 @@ If you are using the field to select multiple forums, you will have to iterate o
   ?>
 </ul>
 ```
+
+You can also use the field in to select a single forum and then show the latests topics in that forum:
+
+Disclaimer: Due to bbPress's use of global variables this code is HORRIBLE.
+
+```
+<?php
+// Get ACF field values
+$forum = get_field('forum');
+$limit = get_field('limit');
+?>
+<ul>
+  <?php
+
+    if( bbp_has_topics() ){
+
+      // Override the topic query to set the forum to query
+      $args = bbpress()->topic_query->query;
+      $args['post_parent'] = $forum->ID;
+      $args['posts_per_page'] = $limit;
+      $args['meta_query'] = bbpress()->topic_query->meta_query->queries;
+
+      bbpress()->topic_query = new WP_Query($args);
+
+      while ( bbp_topics() ) : bbp_the_topic();
+
+        // Skip sticky posts
+        if(bbp_is_topic_sticky()){
+          continue;
+        }
+
+        $reply_id = bbp_get_topic_last_reply_id();
+        $date = get_post_time( 'd/m', false, $reply_id );
+
+        echo "<li><span class='date'>".$date."</span> <a href='".bbp_get_topic_permalink()."'>". bbp_get_topic_title() ."</a> by ".bbp_get_reply_author_display_name()."</li>";
+      endwhile;
+
+    }
+  ?>
+</ul>
+```
+
+
 
 About
 =====
