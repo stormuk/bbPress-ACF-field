@@ -1,7 +1,5 @@
 <?php
 
-echo "LOADING FILE bbpress_forums-v3";
-
 class acf_field_bbpress_forums extends acf_Field
 {
 
